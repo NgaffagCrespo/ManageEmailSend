@@ -9,21 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import java.util.Collection;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Books {
+public class Roles_Manager {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String book_author;
-    private Date publication_date;
-    private String gender;
-
+    private String roleName;
 
 
 }
