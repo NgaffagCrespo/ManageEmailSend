@@ -2,6 +2,7 @@ package booksmanagement.nextGenTest.services;
 
 import booksmanagement.nextGenTest.entities.Books;
 import booksmanagement.nextGenTest.repositories.BooksRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 @Transactional
 public class BooksServiceImpl implements BooksService {
+
 
     private BooksRepository booksRepository;
 

@@ -8,4 +8,6 @@ public interface ManagementUsers_Service {
     User_Manager addUser( User_Manager userManager);
     Roles_Manager addRoles(Roles_Manager rolesManager);
     void addRolesToUser(String username, String roleName);
+
+    User_Manager showUser(String username);
 }

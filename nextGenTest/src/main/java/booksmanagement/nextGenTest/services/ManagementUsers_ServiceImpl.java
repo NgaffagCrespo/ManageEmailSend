@@ -39,4 +39,9 @@ public class ManagementUsers_ServiceImpl implements ManagementUsers_Service {
         user_manager.getRolesManagers().add(roles_manager);
 
     }
+
+    @Override
+    public User_Manager showUser(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

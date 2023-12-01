@@ -24,6 +24,4 @@ public class Books {
     private Date publication_date;
     private String gender;
 
-
-
 }
