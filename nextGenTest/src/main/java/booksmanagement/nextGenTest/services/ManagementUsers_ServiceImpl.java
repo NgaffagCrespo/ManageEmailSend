@@ -4,6 +4,7 @@ import booksmanagement.nextGenTest.entities.Roles_Manager;
 import booksmanagement.nextGenTest.entities.User_Manager;
 import booksmanagement.nextGenTest.repositories.RolesRepository;
 import booksmanagement.nextGenTest.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +16,21 @@ public class ManagementUsers_ServiceImpl implements ManagementUsers_Service {
     private RolesRepository rolesRepository;
     private UserRepository userRepository;
 
-    public ManagementUsers_ServiceImpl(RolesRepository rolesRepository, UserRepository userRepository) {
+    private PasswordEncoder passwordEncoder;
+
+    public ManagementUsers_ServiceImpl(RolesRepository rolesRepository, UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.rolesRepository = rolesRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User_Manager addUser(User_Manager userManager) {
+
+        String passwrdToEncoded = userManager.getPassword();
+
+        userManager.setPassword(passwordEncoder.encode(passwrdToEncoded));
+
         return userRepository.save(userManager);
     }
 

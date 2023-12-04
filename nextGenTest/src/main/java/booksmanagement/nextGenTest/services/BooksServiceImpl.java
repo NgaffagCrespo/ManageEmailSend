@@ -1,8 +1,9 @@
 package booksmanagement.nextGenTest.services;
 
-import booksmanagement.nextGenTest.entities.Books;
+import booksmanagement.nextGenTest.entities.writings;
 import booksmanagement.nextGenTest.repositories.BooksRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,43 +12,45 @@ import java.util.List;
 
 @Service
 @Transactional
+@AllArgsConstructor
+@NoArgsConstructor
 public class BooksServiceImpl implements BooksService {
 
 
     private BooksRepository booksRepository;
 
-    public BooksServiceImpl(BooksRepository booksRepository) {
+   /* public BooksServiceImpl(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
+    }*/
+
+    @Override
+    public writings addBook(writings writings) {
+
+        writings.setPublication_date(new Date());
+        return booksRepository.save(writings);
     }
 
     @Override
-    public Books addBook(Books book) {
+    public writings showBookbyAuthor(String author) {
 
-        book.setPublication_date(new Date());
-        return booksRepository.save(book);
+        return booksRepository.findByBook_author(author);
     }
 
     @Override
-    public Books showBookbyAuthor(String book_author) {
-
-        return booksRepository.findByBook_author(book_author);
+    public writings showBookbyGender(String gender) {
+        return booksRepository.findByGender(gender);
     }
 
     @Override
-    public Books showBookbyGender(String book_gender) {
-        return booksRepository.findByGender(book_gender);
+    public writings showBookbyTitle(String title) {
+        return booksRepository.findByTitle(title);
     }
 
     @Override
-    public Books showBookbyTitle(String book_title) {
-        return booksRepository.findByTitle(book_title);
-    }
+    public List<writings> AllBooks() {
 
-    @Override
-    public List<Books> AllBooks() {
+        List<writings> writingsList = booksRepository.findAll();
 
-        List<Books> booksList = booksRepository.findAll();
-
-        return booksList;
+        return writingsList;
     }
 }

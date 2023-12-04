@@ -1,15 +1,15 @@
 package booksmanagement.nextGenTest.services;
 
-import booksmanagement.nextGenTest.entities.Books;
+import booksmanagement.nextGenTest.entities.writings;
 
 import java.util.List;
 
 public interface BooksService {
 
-    Books addBook(Books book);
-    Books showBookbyAuthor(String book_author);
-    Books showBookbyGender(String book_gender);
-    Books showBookbyTitle(String book_title);
-    List<Books> AllBooks();
+    writings addBook(writings writings);
+    writings showBookbyAuthor(String author);
+    writings showBookbyGender(String gender);
+    writings showBookbyTitle(String title);
+    List<writings> AllBooks();
 
 }

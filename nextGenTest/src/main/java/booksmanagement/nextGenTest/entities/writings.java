@@ -15,7 +15,7 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Books {
+public class writings {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
