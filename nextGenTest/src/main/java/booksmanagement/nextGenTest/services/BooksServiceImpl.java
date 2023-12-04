@@ -1,12 +1,13 @@
 package booksmanagement.nextGenTest.services;
 
-import booksmanagement.nextGenTest.entities.writings;
+import booksmanagement.nextGenTest.entities.Writings;
+import booksmanagement.nextGenTest.exceptions.WritingsCanNotSaveException;
+import booksmanagement.nextGenTest.exceptions.WritingsNotFoundException;
 import booksmanagement.nextGenTest.repositories.BooksRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,32 +23,97 @@ public class BooksServiceImpl implements BooksService {
     }
 
     @Override
-    public writings addBook(writings writings) {
+    public Writings addBook(Writings writings) {
 
         writings.setPublication_date(new Date());
-        return booksRepository.save(writings);
+
+        Writings writings1 = new Writings();
+        try {
+            writings1 = booksRepository.save(writings);
+
+
+        } catch (Exception e) {
+
+            throw new WritingsCanNotSaveException("Il y'a un probleme lors de l'enregistrement du livre ");
+
+        }
+        return writings1;
+
     }
 
     @Override
-    public writings showBookbyAuthor(String author) {
+    public Writings showBookbyAuthor(String author) {
 
-        return booksRepository.findByAuthor(author);
+        Writings writings = new Writings();
+
+        try{
+
+            writings = booksRepository.findByAuthor(author);
+
+        }catch (Exception e){
+
+            throw new WritingsNotFoundException("Livre que vous recherchez est introuvable");
+
+        }
+
+
+        return writings;
     }
 
     @Override
-    public writings showBookbyGender(String gender) {
-        return booksRepository.findByGender(gender);
+    public Writings showBookbyGender(String gender) {
+
+        Writings writings = new Writings();
+
+        try{
+
+            writings = booksRepository.findByGender(gender);
+
+        }catch (Exception e){
+
+            throw new WritingsNotFoundException("Livre que vous recherchez est introuvable");
+
+        }
+
+
+        return writings;
+
     }
 
     @Override
-    public writings showBookbyTitle(String title) {
-        return booksRepository.findByTitle(title);
+    public Writings showBookbyTitle(String title) {
+
+        Writings writings = new Writings();
+
+        try{
+
+            writings =  booksRepository.findByTitle(title);
+
+        }catch (Exception e){
+
+            throw new WritingsNotFoundException("Livre que vous recherchez est introuvable");
+
+        }
+
+        return writings;
     }
 
     @Override
-    public List<writings> AllBooks() {
+    public List<Writings> AllBooks() {
 
-        List<writings> writingsList = booksRepository.findAll();
+        List<Writings> writingsList = new ArrayList<>();
+
+        Writings writings = new Writings();
+
+        try{
+
+            writingsList = booksRepository.findAll();
+
+        }catch (Exception e){
+
+            throw new WritingsNotFoundException("Il semblerait que la liste des livres soient introuvable");
+
+        }
 
         return writingsList;
     }

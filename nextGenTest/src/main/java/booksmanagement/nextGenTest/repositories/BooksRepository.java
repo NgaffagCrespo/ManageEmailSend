@@ -1,13 +1,13 @@
 package booksmanagement.nextGenTest.repositories;
 
-import booksmanagement.nextGenTest.entities.writings;
+import booksmanagement.nextGenTest.entities.Writings;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 
-public interface BooksRepository extends JpaRepository<writings,Long> {
+public interface BooksRepository extends JpaRepository<Writings,Long> {
 
-    writings findByAuthor(String author);
-    writings findByTitle(String title);
-    writings findByGender(String gender);
+    Writings findByAuthor(String author);
+    Writings findByTitle(String title);
+    Writings findByGender(String gender);
 }

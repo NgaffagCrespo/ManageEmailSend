@@ -1,6 +1,6 @@
 package booksmanagement.nextGenTest;
 
-import booksmanagement.nextGenTest.entities.writings;
+import booksmanagement.nextGenTest.entities.Writings;
 import booksmanagement.nextGenTest.entities.Roles_Manager;
 import booksmanagement.nextGenTest.entities.User_Manager;
 import booksmanagement.nextGenTest.services.BooksService;
@@ -44,9 +44,9 @@ public class NextGenTestApplication {
 			managementUsers_service.addUser(new User_Manager(null,"Alice","789",new ArrayList<>()));
 
 			//On enregistre quelques livres
-			booksService.addBook(new writings(null,"DataScience","Einstein",null,"science"));
-			booksService.addBook(new writings(null,"Mathematiques","Ramanoudjan",null,"maths"));
-			booksService.addBook(new writings(null,"pere riche pere pauvre","Robert Kiosaki",null,"culture"));
+			booksService.addBook(new Writings(null,"DataScience","Einstein",null,"science"));
+			booksService.addBook(new Writings(null,"Mathematiques","Ramanoudjan",null,"maths"));
+			booksService.addBook(new Writings(null,"pere riche pere pauvre","Robert Kiosaki",null,"culture"));
 
 
 			//Ici on va attribuer des roles aux utilisateurs
