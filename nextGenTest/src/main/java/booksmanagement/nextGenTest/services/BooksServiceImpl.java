@@ -85,15 +85,15 @@ public class BooksServiceImpl implements BooksService {
 
         Writings writings = new Writings();
 
-        try{
+      //  try{
 
             writings =  booksRepository.findByTitle(title);
 
-        }catch (Exception e){
+       // }catch (Exception e){
 
-            throw new WritingsNotFoundException("Livre que vous recherchez est introuvable");
+        //    throw new WritingsNotFoundException("Livre que vous recherchez est introuvable");
 
-        }
+      //  }
 
         return writings;
     }

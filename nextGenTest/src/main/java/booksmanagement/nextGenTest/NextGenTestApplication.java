@@ -38,6 +38,7 @@ public class NextGenTestApplication {
 			managementUsers_service.addRoles(new Roles_Manager(null,"recherche"));
 			managementUsers_service.addRoles(new Roles_Manager(null,"ajout"));
 			managementUsers_service.addRoles(new Roles_Manager(null,"recuperation"));
+			managementUsers_service.addRoles(new Roles_Manager(null,"test"));
 			//On enregistre quelques utilisateurs
 			managementUsers_service.addUser(new User_Manager(null,"Crespo","123",new ArrayList<>()));
 			managementUsers_service.addUser(new User_Manager(null,"Stephane","456",new ArrayList<>()));
@@ -53,6 +54,7 @@ public class NextGenTestApplication {
 			managementUsers_service.addRolesToUser("Crespo","ajout");
 			managementUsers_service.addRolesToUser("Crespo","recherche");
 			managementUsers_service.addRolesToUser("Crespo","recuperation");
+			managementUsers_service.addRolesToUser("Crespo","test");
 			managementUsers_service.addRolesToUser("Stephane","ajout");
 			managementUsers_service.addRolesToUser("Stephane","recuperation");
 			managementUsers_service.addRolesToUser("Alice","recherche");

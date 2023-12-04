@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@NoArgsConstructor
 @RequestMapping(path = "/booksManagement")
 public class BooksRestService {
 
@@ -38,24 +37,24 @@ public class BooksRestService {
     /*Ici c'est le service API qui permet de rechercher un livre avec
     pour critere de recherche le nom de l'auteur du livre*/
     @GetMapping(path = "/books/{author}")
-    @PostAuthorize("hasAuthority('recherche')")
-    public Writings getBookByAuthor(String author){
+    @PostAuthorize("hasAuthority('test')")
+    public Writings getBookByAuthor(@PathVariable String author){
         return booksService.showBookbyAuthor(author);
     }
 
     /*Ici c'est le service API qui permet de rechercher un livre avec
    pour critere de recherche le genre du livre*/
     @GetMapping(path = "/books/{gender}")
-    @PostAuthorize("hasAuthority('recherche')")
-    public Writings getBookByGender(String gender){
+    @PostAuthorize("hasAuthority('test')")
+    public Writings getBookByGender(@PathVariable String gender){
         return booksService.showBookbyGender(gender);
     }
 
     /*Ici c'est le service API qui permet de rechercher un livre avec
    pour critere de recherche le titre du livre*/
     @GetMapping(path = "/books/{title}")
-    @PostAuthorize("hasAuthority('recherche')")
-    public Writings getBookByTitle(String title){
+    @PostAuthorize("hasAuthority('test')")
+    public Writings getBookByTitle(@PathVariable String title){
         return booksService.showBookbyTitle(title);
     }
 
