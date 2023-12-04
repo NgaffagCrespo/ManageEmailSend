@@ -20,7 +20,7 @@ public class writings {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String book_author;
+    private String author;
     private Date publication_date;
     private String gender;
 

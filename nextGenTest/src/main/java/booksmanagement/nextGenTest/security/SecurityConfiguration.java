@@ -5,6 +5,7 @@ import booksmanagement.nextGenTest.services.ManagementUsers_Service;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,10 +64,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         //Ici c'est pour pouvoir acceder a la base de donnee dans h2
         httpSecurity.authorizeHttpRequests().antMatchers("/h2-console/**").permitAll();
+       // httpSecurity.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/books/**").hasAuthority("ajout");
+        //httpSecurity.authorizeHttpRequests().antMatchers(HttpMethod.GET,"/books/**").hasAuthority("ajout");
 
         httpSecurity.formLogin();
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
         httpSecurity.addFilter(new FilterJwtAuthentification(authenticationManager()));
+        httpSecurity.addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
     }

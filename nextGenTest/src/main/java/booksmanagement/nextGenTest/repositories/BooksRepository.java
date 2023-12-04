@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BooksRepository extends JpaRepository<writings,Long> {
 
-    writings findByBook_author(String author_name);
+    writings findByAuthor(String author);
     writings findByTitle(String title);
     writings findByGender(String gender);
 }

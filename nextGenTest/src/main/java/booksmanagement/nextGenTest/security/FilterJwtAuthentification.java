@@ -1,5 +1,8 @@
 package booksmanagement.nextGenTest.security;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +17,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class FilterJwtAuthentification extends UsernamePasswordAuthenticationFilter {
@@ -44,6 +51,33 @@ public class FilterJwtAuthentification extends UsernamePasswordAuthenticationFil
         * */
         User user = (User) authResult.getPrincipal();
 
-        super.successfulAuthentication(request, response, chain, authResult);
+        //Dans le code qui suit nous utilisons un algorithme pour generer la signature du web token
+        Algorithm algorithm = Algorithm.HMAC256("SecretToAccessWebServiceForBooksManagement");
+
+        //Ici on genere le jwt Token
+        String jwtAcessToken =
+                JWT.create()
+                        .withSubject(user.getUsername())
+                                .withExpiresAt(new Date(System.currentTimeMillis()+30*60*1000))
+                                        .withIssuer(request.getRequestURL().toString())
+                                                .withClaim("roles",user.getAuthorities().stream().map(grantedAuthority -> {
+                                                    return grantedAuthority.getAuthority(); // Ici on reconvertit la liste de Granted Autorities en une liste de String
+                                                }).collect(Collectors.toList()))
+                                                        .sign(algorithm);
+
+        String jwtAcessRefreshToken =
+                JWT.create()
+                        .withSubject(user.getUsername())
+                        .withExpiresAt(new Date(System.currentTimeMillis()+60*60*1000))
+                        .withIssuer(request.getRequestURL().toString())
+                        .sign(algorithm);
+
+        Map<String,String> tokenId = new HashMap<>();
+        tokenId.put("Acess-Token",jwtAcessToken);
+        tokenId.put("Refresh-Token",jwtAcessRefreshToken);
+        //ici on indique que le corps de la response sera au format
+        response.setContentType("application/json");
+        //ici on envoit le tokenId en format json dans le corps de la response
+        new ObjectMapper().writeValue(response.getOutputStream(),tokenId);
     }
 }

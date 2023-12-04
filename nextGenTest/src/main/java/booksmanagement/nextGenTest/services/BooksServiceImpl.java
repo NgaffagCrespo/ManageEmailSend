@@ -12,16 +12,14 @@ import java.util.List;
 
 @Service
 @Transactional
-@AllArgsConstructor
-@NoArgsConstructor
 public class BooksServiceImpl implements BooksService {
 
 
     private BooksRepository booksRepository;
 
-   /* public BooksServiceImpl(BooksRepository booksRepository) {
+    public BooksServiceImpl(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
-    }*/
+    }
 
     @Override
     public writings addBook(writings writings) {
@@ -33,7 +31,7 @@ public class BooksServiceImpl implements BooksService {
     @Override
     public writings showBookbyAuthor(String author) {
 
-        return booksRepository.findByBook_author(author);
+        return booksRepository.findByAuthor(author);
     }
 
     @Override
