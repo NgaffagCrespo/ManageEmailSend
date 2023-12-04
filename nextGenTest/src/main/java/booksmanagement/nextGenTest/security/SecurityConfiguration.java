@@ -64,6 +64,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         //Ici c'est pour pouvoir acceder a la base de donnee dans h2
         httpSecurity.authorizeHttpRequests().antMatchers("/h2-console/**").permitAll();
+
+        //Ici c'est pour pouvoir acceder a la documentation de l'API
+        httpSecurity.authorizeHttpRequests().antMatchers("/v3/api-docs/**").permitAll();
        // httpSecurity.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/books/**").hasAuthority("ajout");
         //httpSecurity.authorizeHttpRequests().antMatchers(HttpMethod.GET,"/books/**").hasAuthority("ajout");
 
